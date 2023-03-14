@@ -28,4 +28,16 @@ app.get("/submit/:selectedWybor/:pesel", (req, res) => {
     else res.send("dodano rekord")
   })
 })
+
+app.get("/result_for_admin", (req, res) => {
+  const selecetedWybor = req.params.selectedWybor
+  const pesel = req.params.pesel
+
+  const sql = `SELECT * FROM spis`
+  con.query(sql, (err, result, fields) => {
+    if (err) console.log(err)
+    else res.send(result)
+  })
+})
+
 app.listen(port, () => console.log(`app on ${port}`))
