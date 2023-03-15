@@ -1,3 +1,4 @@
+/*import czcionki z google fonts*/
 @import url("https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap");
 body {
   margin: 0;
@@ -5,49 +6,55 @@ body {
   height: 100vh;
   overflow-y: hidden;
 }
-:root {
-  --gray: lightgray;
+/*tytul strony*/
+#admin_title {
+  text-align: center;
+  font-family: "Tilt Warp", cursive;
+  font-size: 20px;
 }
+/*pojemnik na "tabele"*/
 #all {
   display: grid;
   grid-auto-flow: column;
   margin: 15px;
   gap: 15px;
 }
+/*kolumna (div) */
 .columna {
   height: 80vh;
   border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  overflow-y: auto;
-}
-.kandydat {
   border: 5px solid black;
-  background-color: var(--gray);
+  background-color: lightgray;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-#admin_title {
-  text-align: center;
-  font-family: "Tilt Warp", cursive;
-  font-size: 20px;
-}
+/*tytul kolumny (kandydata) */
 .title_in_column {
   font-family: "Tilt Warp", cursive;
   letter-spacing: 2px;
   font-size: 40px;
 }
-#przycisk {
+/*guziki glowne, pod "admin"*/
+.przycisk {
   border-radius: 10px;
   font-size: 20px;
   padding: 10px;
   cursor: pointer;
 }
+/*wyglad jednego glosu w kolumnie*/
 .wynik {
   font-family: "Tilt Warp", cursive;
   letter-spacing: 2px;
   font-size: 25px;
   font-weight: 100;
+}
+/*guzik od usuwania glosu*/
+.remove_btn {
+  border-radius: 10px;
+  font-family: "Tilt Warp", cursive;
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
 }
