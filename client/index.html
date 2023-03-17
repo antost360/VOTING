@@ -10,23 +10,8 @@
   <body>
     <div id="all" class="flex_center">
       <div id="div_lista_kandydatow" class="flex_center">
-        <h1 id="title">ZAGLOSUJ NA KANDYDATA</h1>
-        <div id="lista_kandydatow">
-          <!--kandydat_1-->
-          <div class="div_kandydat">
-            <input class="kandydat" type="radio" name="wybor" id="kandydat_1" value="kandydat_1" required />
-            <label class="kandydat_label" for="kandydat_1">kandydat_1</label>
-          </div>
-          <!--kandydat_2-->
-          <div class="div_kandydat">
-            <input class="kandydat" type="radio" name="wybor" id="kandydat_2" value="kandydat_2" required />
-            <label class="kandydat_label" for="kandydat_2">kandydat_2</label>
-          </div>
-          <!--kandydat_3-->
-          <div class="div_kandydat">
-            <input class="kandydat" type="radio" name="wybor" id="kandydat_3" value="kandydat_3" required />
-            <label class="kandydat_label" for="kandydat_3">kandydat_3</label>
-          </div>
+        <h1 class="title">ZAGLOSUJ NA KANDYDATA</h1>
+        <div id="lista_kandydatow">          
         </div>
         <!--miejsce do wpisania pesela-->
         <div id="input_pesel">
@@ -35,7 +20,7 @@
         </div>
         <!--wyslanie glosu-->
         <button id="zaglosuj_btn" type="submit" class="przycisk" onclick="zaglosuj()">ZAGLOSUJ</button>
-      </div>
+      <h1 class="title" id="bledy"></h1>
     </div>
     <script src="config.js"></script>
     <script src="app.js"></script>

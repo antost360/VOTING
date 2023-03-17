@@ -10,23 +10,15 @@
   <body>
     <div id="admin_title">
       <h1>ADMIN</h1>
-      <button class="przycisk" onclick="fresh_result()">pokaz najświeższe wyniki</button>
+      <button class="przycisk" onclick="pokaz_kandydatow()">pokaz najświeższe wyniki</button>
       <button class="przycisk" onclick="remove_result()">usun wszystko</button>
     </div>
     <!--glowny pojemnik na "tabele"-->
-    <div id="all">
-      <!--kandydat_1 kolumna-->
-      <div class="columna kandydat" id="kandydat_1">
-        <h1 class="title_in_column">kandydat_1</h1>
-      </div>
-      <!--kandydat_2 kolumna-->
-      <div class="columna kandydat" id="kandydat_2">
-        <h1 class="title_in_column">kandydat_2</h1>
-      </div>
-      <!--kandydat_3 kolumna-->
-      <div class="columna kandydat" id="kandydat_3">
-        <h1 class="title_in_column">kandydat_3</h1>
-      </div>
+    <div id="all"></div>
+    <div id="dodawanie">
+      <label for="dodaj">DODAJ KANDYDATA</label>
+      <input type="text" id="dodaj" />
+      <button id="dodaj_guzik" onclick="dodaj_kandydata()">DODAJ</button>
     </div>
     <script src="admin.js"></script>
   </body>
