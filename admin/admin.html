@@ -9,17 +9,24 @@
   </head>
   <body>
     <div id="admin_title">
-      <h1>ADMIN</h1>
-      <button class="przycisk" onclick="pokaz_kandydatow()">pokaz najświeższe wyniki</button>
-      <button class="przycisk" onclick="remove_result()">usun wszystko</button>
+      <div>
+        <h1>ADMIN</h1>
+      </div>
+      <div>
+        <canvas id="acquisitions"></canvas>
+        <button class="przycisk" onclick="pokaz_kandydatow()">pokaz najświeższe wyniki</button>
+        <button class="przycisk" onclick="remove_result()">usun wszystko</button>
+
+        <div id="dodawanie">
+          <label for="dodaj">DODAJ KANDYDATA</label>
+          <input type="text" class="przycisk" id="dodaj" />
+          <button id="dodaj_guzik" class="przycisk" onclick="dodaj_kandydata()">DODAJ</button>
+        </div>
+      </div>
     </div>
     <!--glowny pojemnik na "tabele"-->
     <div id="all"></div>
-    <div id="dodawanie">
-      <label for="dodaj">DODAJ KANDYDATA</label>
-      <input type="text" id="dodaj" />
-      <button id="dodaj_guzik" onclick="dodaj_kandydata()">DODAJ</button>
-    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"></script>
     <script src="admin.js"></script>
   </body>
 </html>

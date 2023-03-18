@@ -30,7 +30,7 @@ app.get("/submit/:selectedWybor/:pesel", (req, res) => {
   const selecetedWybor = req.params.selectedWybor
   const pesel = req.params.pesel
 
-  const sql = `INSERT INTO ${table} (pesel_wyborcy, kandydat) VALUES ('${pesel}', '${selecetedWybor}')`
+  const sql = `INSERT INTO ${table} (pesel_wyborcy, kandydat) VALUES ('${pesel}', '${selecetedWybor}'); `
   con.query(sql, (err, result, fields) => {
     if (err) console.log(err)
     else res.send("dodano rekord")
@@ -46,7 +46,7 @@ app.get("/remove_result", (req, res) => {
   })
 })
 app.get("/wyniki", (req, res) => {
-  const sql = `select pesel_wyborcy from ${table}`
+  const sql = `select pesel_wyborcy, kandydat from ${table}`
   con.query(sql, (err, result, fields) => {
     if (err) console.log(err)
     else res.send(result)
@@ -61,6 +61,17 @@ app.get("/add/:kandydat", (req, res) => {
     else {
       kandydaci.push(kandydat)
       res.send(`dodano kandydata ${kandydat}`)
+    }
+  })
+})
+app.get("/usun_kandydata/:kandydat, ", (req, res) => {
+  const kandydat = req.params.kandydat
+
+  const sql = `DELETE FROM ${admin_table} WHERE kandydat="${kandydat}"; DELETE FROM ${table} WHERE kandydat="${kandydat} "`
+  con.query(sql, (err, result, fields) => {
+    if (err) console.log(err)
+    else {
+      res.send(`usunieto kandydata ${kandydat}`)
     }
   })
 })
