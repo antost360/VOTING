@@ -9,13 +9,18 @@
   </head>
   <body>
     <div id="admin_title">
-      <div>
+      <div id="admin_text">
         <h1>ADMIN</h1>
+        <div id="wykres">
+          <canvas id="myChart"></canvas>
+        </div>
       </div>
       <div>
-        <canvas id="acquisitions"></canvas>
+        <a href="../client/index.html">
+          <button class="przycisk" id="powrot">POWROT DO CLIENTA</button>
+        </a>
         <button class="przycisk" onclick="pokaz_kandydatow()">pokaz najświeższe wyniki</button>
-        <button class="przycisk" onclick="remove_result()">usun wszystko</button>
+        <button class="przycisk" onclick="remove_result()">usun glosy</button>
 
         <div id="dodawanie">
           <label for="dodaj">DODAJ KANDYDATA</label>
@@ -26,7 +31,8 @@
     </div>
     <!--glowny pojemnik na "tabele"-->
     <div id="all"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="admin.js"></script>
   </body>
 </html>

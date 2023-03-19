@@ -3,6 +3,10 @@ var kandydaci = []
 var wyniki = []
 const all = document.getElementById("all")
 var div_wynik
+var d = []
+var podpis = []
+var votes = []
+var glosy
 async function pokaz_kandydatow() {
   //pobranie danych z serwera, serwer z bazy danych (/server/index.js)
   var data_kandydaci = await fetch(`${base_url}/lista_kandydatow`)
@@ -11,8 +15,16 @@ async function pokaz_kandydatow() {
   var data_wyniki = await fetch(`${base_url}/wyniki`)
   wyniki = await data_wyniki.json()
 
+  document.getElementById("wykres").innerHTML = ""
+  const canvas = document.createElement("canvas")
+  canvas.setAttribute("id", "myChart")
+  document.getElementById("wykres").appendChild(canvas)
   all.innerHTML = ""
+  podpis = []
+  var glosy = 0
   for (var i = 0; i <= kandydaci.length - 1; i++) {
+    podpis.push(kandydaci[i].kandydat)
+
     const div = document.createElement("div")
     div.classList.add("div")
 
@@ -26,24 +38,25 @@ async function pokaz_kandydatow() {
     tytul.classList.add("tytul")
     div_tytul.appendChild(tytul)
 
-    const delete_button = document.createElement("button")
-    delete_button.classList.add("usun_kandydata")
-    delete_button.innerHTML = `usun ${kandydaci[i].kandydat} ❌`
-    delete_button.setAttribute("onclick", `usun_kandydata(${kandydaci[i].kandydat})`)
-    div_tytul.appendChild(delete_button)
+    const delete_btn = document.createElement("button")
+    delete_btn.innerHTML = "usun kandydata"
+    delete_btn.setAttribute("onclick", `usun_kandydata("${kandydaci[i].kandydat}")`)
+    delete_btn.classList.add("przycisk")
+    div_tytul.appendChild(delete_btn)
 
     pokaz_wyniki(kandydaci[i].kandydat)
     div.appendChild(div_tytul)
     div.appendChild(div_wynik)
     all.appendChild(div)
   }
+  Charte()
 }
 //usuwa wszystkie rekordy z tabeli spis
 async function remove_result() {
   const url = `${base_url}/remove_result`
 
   await fetch(url)
-  fresh_result()
+  pokaz_kandydatow()
 }
 //wyslanie zapytania do servera o dodanie kandydata, nazwa z inputa
 
@@ -57,13 +70,6 @@ async function dodaj_kandydata() {
   alert("dodano kandydata")
   pokaz_kandydatow()
 }
-//wyslanie zapytania do servera o usuniecie kandydata o podanym id
-async function usun_kandydata(kandydat) {
-  console.log(kandydat)
-  const url = `${base_url}/usun_kandydata/${kandydat}`
-  await fetch(url)
-  pokaz_kandydatow()
-}
 //pokazuje pesela u odpowiedniego kanydata
 function pokaz_wyniki(kandydat) {
   for (var i = 0; i <= wyniki.length - 1; i++) {
@@ -74,4 +80,44 @@ function pokaz_wyniki(kandydat) {
       div_wynik.appendChild(tytul)
     }
   }
+}
+
+function Charte() {
+  const ctx = document.getElementById("myChart")
+  char = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: d,
+      datasets: [
+        {
+          label: "Votes",
+          data: podpis,
+        },
+      ],
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: true,
+        },
+        title: {
+          display: true,
+          text: "Głosy",
+          color: "black",
+        },
+        tooltip: {
+          enabled: true,
+        },
+        label: {
+          color: "black",
+        },
+      },
+    },
+  })
+}
+async function usun_kandydata(kandydat) {
+  var wybrany = kandydat
+  const url = `${base_url}/usun/${wybrany}`
+  await fetch(url)
+  pokaz_kandydatow()
 }

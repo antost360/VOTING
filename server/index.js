@@ -64,17 +64,6 @@ app.get("/add/:kandydat", (req, res) => {
     }
   })
 })
-app.get("/usun_kandydata/:kandydat, ", (req, res) => {
-  const kandydat = req.params.kandydat
-
-  const sql = `DELETE FROM ${admin_table} WHERE kandydat="${kandydat}"; DELETE FROM ${table} WHERE kandydat="${kandydat} "`
-  con.query(sql, (err, result, fields) => {
-    if (err) console.log(err)
-    else {
-      res.send(`usunieto kandydata ${kandydat}`)
-    }
-  })
-})
 app.get("/lista_kandydatow", (req, res) => {
   const sql = `SELECT * FROM ${admin_table}`
   con.query(sql, (err, result, fields) => {
@@ -82,6 +71,21 @@ app.get("/lista_kandydatow", (req, res) => {
     else res.send(result)
   })
 })
+app.get("/usun/:kandydat", (req, res) => {
+  const kandydat = req.params.kandydat
+  console.log(kandydat)
 
+  const sql = `DELETE FROM ${admin_table} WHERE kandydat="${kandydat}"`
+  con.query(sql, (err, result, fields) => {
+    if (err) console.log(err)
+    else {
+      const sql = `DELETE FROM ${table} WHERE kandydat="${kandydat}"`
+      con.query(sql, (err, result, fields) => {
+        if (err) console.log(err)
+        else res.send(result)
+      })
+    }
+  })
+})
 //polaczenie app na zmienna port
 app.listen(port, () => console.log(`app on ${port}`))

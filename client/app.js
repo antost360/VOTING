@@ -65,3 +65,13 @@ async function submit(pesel, selecetedWybor) {
 }
 
 make_kandydat()
+function admin_test() {
+  var password = prompt("podaj haslo do admina")
+
+  if (password != "admin") {
+    alert("niepoprawne haslo")
+    return
+  } else {
+    window.location.href = "../admin/admin.html"
+  }
+}
