@@ -16,9 +16,11 @@ async function zaglosuj() {
         console.log("nieprawidlowy pesel")
         bledy.innerHTML = "nie wpisano peselu"
       } else {
+        bledy.innerHTML = ""
         submit(pesel, selectedWybor)
       }
     } else {
+      bledy.innerHTML = "nie wybrano kandydata"
     }
   })
 }
@@ -60,15 +62,20 @@ async function submit(pesel, selecetedWybor) {
   console.log("url wyslany")
 
   //zakonczenie glosowania
+
   alert("ZAGLOSOWANO WYSLANY")
   location.reload()
 }
 
 make_kandydat()
-function admin_test() {
+async function admin_test() {
+  var data = await fetch(`${base_url}/pokaz_haslo`)
+  var json = await data.json()
+  console.log(json)
+
   var password = prompt("podaj haslo do admina")
 
-  if (password != "admin") {
+  if (password != json[0].haslo) {
     alert("niepoprawne haslo")
     return
   } else {

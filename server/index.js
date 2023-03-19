@@ -8,6 +8,7 @@ const port = 3000
 const database = "voting"
 const table = "spis"
 const admin_table = "kandydaci"
+const haslo_table = "admin_haslo"
 var kandydaci = []
 //lepsze naglowki
 app.use(cors())
@@ -87,5 +88,22 @@ app.get("/usun/:kandydat", (req, res) => {
     }
   })
 })
+app.get("/zmien_haslo/:haslo", (req, res) => {
+  const haslo = req.params.haslo
+  console.log("haslo zapytanie")
+  const sql = `UPDATE ${haslo_table} SET haslo = "${haslo}"`
+  con.query(sql, (err, result, fields) => {
+    if (err) console.log(err)
+    else res.send(result)
+  })
+})
+app.get("/pokaz_haslo", (req, res) => {
+  const sql = `SELECT * FROM ${haslo_table} LIMIT 1`
+  con.query(sql, (err, result, fields) => {
+    if (err) console.log(err)
+    else res.send(result)
+  })
+})
+
 //polaczenie app na zmienna port
 app.listen(port, () => console.log(`app on ${port}`))

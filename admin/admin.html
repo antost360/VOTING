@@ -15,24 +15,22 @@
           <canvas id="myChart"></canvas>
         </div>
       </div>
-      <div>
+      <div id="content">
         <a href="../client/index.html">
           <button class="przycisk" id="powrot">POWROT DO CLIENTA</button>
         </a>
         <button class="przycisk" onclick="pokaz_kandydatow()">pokaz najświeższe wyniki</button>
+        <button class="przycisk" onclick="make_dodaj()">dodaj kandydata</button>
         <button class="przycisk" onclick="remove_result()">usun glosy</button>
-
-        <div id="dodawanie">
-          <label for="dodaj">DODAJ KANDYDATA</label>
-          <input type="text" class="przycisk" id="dodaj" />
-          <button id="dodaj_guzik" class="przycisk" onclick="dodaj_kandydata()">DODAJ</button>
-        </div>
+        <button class="przycisk" onclick="pokaz_zmien_haslo()">zmien haslo</button>
       </div>
     </div>
     <!--glowny pojemnik na "tabele"-->
     <div id="all"></div>
 
+    <script src="haslo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script src="admin.js"></script>
   </body>
 </html>

@@ -121,3 +121,66 @@ async function usun_kandydata(kandydat) {
   await fetch(url)
   pokaz_kandydatow()
 }
+function make_dodaj() {
+  all.innerHTML = ""
+  const div = document.createElement("div")
+  div.setAttribute("id", "dodawanie")
+
+  const label = document.createElement("label")
+  label.setAttribute("for", "dodaj")
+  label.innerHTML = "DODAJ KANDYDATA"
+  label.setAttribute("class", "pesel")
+
+  const input = document.createElement("input")
+  input.setAttribute("type", "text")
+  input.setAttribute("class", "przycisk")
+  input.setAttribute("id", "dodaj")
+
+  const btn = document.createElement("button")
+  btn.setAttribute("id", "dodaj_guzik")
+  btn.setAttribute("class", "przycisk")
+  btn.setAttribute("onclick", "dodaj_kandydata()")
+  btn.innerHTML = "DODAJ"
+
+  div.appendChild(label)
+  div.appendChild(input)
+  div.appendChild(btn)
+  all.appendChild(div)
+}
+async function pokaz_zmien_haslo() {
+  var data = await fetch(`${base_url}/pokaz_haslo`)
+  var json = await data.json()
+
+  all.innerHTML = ""
+  const div = document.createElement("div")
+  div.style.margin = "70px"
+
+  const input = document.createElement("input")
+  input.setAttribute("id", "haslo")
+  input.classList.add("przycisk")
+  input.setAttribute("placeholder", "nowe haslo")
+  input.setAttribute("type", "password")
+
+  const btn = document.createElement("button")
+  btn.innerHTML = "zmien haslo"
+  btn.setAttribute("onclick", `zmien_haslo()`)
+  btn.classList.add("przycisk")
+
+  const haslo_now = document.createElement("h1")
+  haslo_now.innerHTML = "aktualne haslo: " + json[0].haslo
+  haslo_now.classList.add("haslo")
+
+  div.appendChild(haslo_now)
+  div.appendChild(input)
+  div.appendChild(btn)
+  all.appendChild(div)
+}
+async function zmien_haslo() {
+  const new_haslo = document.getElementById("haslo").value
+  console.log(new_haslo)
+
+  const url = `${base_url}/zmien_haslo/${new_haslo}`
+  await fetch(url)
+
+  pokaz_kandydatow()
+}
