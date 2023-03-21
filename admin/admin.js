@@ -3,10 +3,9 @@ var kandydaci = []
 var wyniki = []
 const all = document.getElementById("all")
 var div_wynik
-var d = []
-var podpis = []
-var votes = []
-var glosy
+var glosy = []
+var gora = []
+
 async function pokaz_kandydatow() {
   //pobranie danych z serwera, serwer z bazy danych (/server/index.js)
   var data_kandydaci = await fetch(`${base_url}/lista_kandydatow`)
@@ -15,15 +14,17 @@ async function pokaz_kandydatow() {
   var data_wyniki = await fetch(`${base_url}/wyniki`)
   wyniki = await data_wyniki.json()
 
+  console.log(kandydaci)
   document.getElementById("wykres").innerHTML = ""
   const canvas = document.createElement("canvas")
   canvas.setAttribute("id", "myChart")
   document.getElementById("wykres").appendChild(canvas)
   all.innerHTML = ""
-  podpis = []
-  var glosy = 0
+  gora = []
+  glosy = []
   for (var i = 0; i <= kandydaci.length - 1; i++) {
-    podpis.push(kandydaci[i].kandydat)
+    gora.push(kandydaci[i].kandydat)
+    glosy.push(kandydaci[i].liczba_glosow)
 
     const div = document.createElement("div")
     div.classList.add("div")
@@ -87,11 +88,12 @@ function Charte() {
   char = new Chart(ctx, {
     type: "doughnut",
     data: {
-      labels: d,
+      labels: gora,
+
       datasets: [
         {
-          label: "Votes",
-          data: podpis,
+          label: "glosy: ",
+          data: glosy,
         },
       ],
     },
@@ -102,8 +104,12 @@ function Charte() {
         },
         title: {
           display: true,
-          text: "Głosy",
-          color: "black",
+          text: "rozklad glosów",
+          color: "white",
+          font: {
+            size: 50,
+            family: "Tilt Warp",
+          },
         },
         tooltip: {
           enabled: true,
@@ -184,3 +190,4 @@ async function zmien_haslo() {
 
   pokaz_kandydatow()
 }
+pokaz_kandydatow()

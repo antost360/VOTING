@@ -11,9 +11,6 @@
     <div id="admin_title">
       <div id="admin_text">
         <h1>ADMIN</h1>
-        <div id="wykres">
-          <canvas id="myChart"></canvas>
-        </div>
       </div>
       <div id="content">
         <a href="../client/index.html">
@@ -23,12 +20,19 @@
         <button class="przycisk" onclick="make_dodaj()">dodaj kandydata</button>
         <button class="przycisk" onclick="remove_result()">usun glosy</button>
         <button class="przycisk" onclick="pokaz_zmien_haslo()">zmien haslo</button>
+
+        <a href="#miejsce_na_wykres">
+          <button class="przycisk">wykres ⬇⬇⬇</button>
+        </a>
       </div>
     </div>
     <!--glowny pojemnik na "tabele"-->
     <div id="all"></div>
-
-    <script src="haslo.js"></script>
+    <div id="miejsce_na_wykres">
+      <div id="wykres">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="admin.js"></script>

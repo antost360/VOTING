@@ -27,14 +27,20 @@ con.connect((err) => {
   else console.log(`connected to "${database}"`)
 })
 //do clienta, wyslanie glosu z peselem
-app.get("/submit/:selectedWybor/:pesel", (req, res) => {
+app.get("/submit/:selectedWybor/:pesel/", (req, res) => {
   const selecetedWybor = req.params.selectedWybor
   const pesel = req.params.pesel
 
   const sql = `INSERT INTO ${table} (pesel_wyborcy, kandydat) VALUES ('${pesel}', '${selecetedWybor}'); `
   con.query(sql, (err, result, fields) => {
     if (err) console.log(err)
-    else res.send("dodano rekord")
+    else console.log("dodano do glos spis")
+  })
+
+  const sql2 = `UPDATE ${admin_table} SET liczba_glosow = liczba_glosow + 1 WHERE kandydat = "${selecetedWybor}"`
+  con.query(sql2, (err, result, fields) => {
+    if (err) console.log(err)
+    else res.send("dodano glos do kandydaci")
   })
 })
 
@@ -75,7 +81,6 @@ app.get("/lista_kandydatow", (req, res) => {
 //usuwanie kanydadata z bazy
 app.get("/usun/:kandydat", (req, res) => {
   const kandydat = req.params.kandydat
-  console.log(kandydat)
 
   const sql = `DELETE FROM ${admin_table} WHERE kandydat="${kandydat}"`
   con.query(sql, (err, result, fields) => {
