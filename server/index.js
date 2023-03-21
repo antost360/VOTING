@@ -72,6 +72,7 @@ app.get("/lista_kandydatow", (req, res) => {
     else res.send(result)
   })
 })
+//usuwanie kanydadata z bazy
 app.get("/usun/:kandydat", (req, res) => {
   const kandydat = req.params.kandydat
   console.log(kandydat)
@@ -88,6 +89,7 @@ app.get("/usun/:kandydat", (req, res) => {
     }
   })
 })
+//zmienianie hasla
 app.get("/zmien_haslo/:haslo", (req, res) => {
   const haslo = req.params.haslo
   console.log("haslo zapytanie")
@@ -97,6 +99,7 @@ app.get("/zmien_haslo/:haslo", (req, res) => {
     else res.send(result)
   })
 })
+//wyslanie hasla
 app.get("/pokaz_haslo", (req, res) => {
   const sql = `SELECT * FROM ${haslo_table} LIMIT 1`
   con.query(sql, (err, result, fields) => {
