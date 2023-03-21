@@ -41,7 +41,7 @@ async function pokaz_kandydatow() {
     const delete_btn = document.createElement("button")
     delete_btn.innerHTML = "usun kandydata"
     delete_btn.setAttribute("onclick", `usun_kandydata("${kandydaci[i].kandydat}")`)
-    delete_btn.classList.add("przycisk")
+    delete_btn.setAttribute("class", "przycisk remove_btn")
     div_tytul.appendChild(delete_btn)
 
     pokaz_wyniki(kandydaci[i].kandydat)

@@ -1,11 +1,12 @@
 /*import czcionki z google fonts*/
 @import url("https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap");
 body {
-  background-color: whitesmoke;
-
+  /* background-color: whitesmoke; */
+  background-color: rgba(0, 0, 0, 0.719);
   margin: 0;
   box-sizing: border-box;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 /*tytul strony*/
 #admin_title {
@@ -27,30 +28,19 @@ body {
   margin: 15px;
   gap: 15px;
 }
-/*kolumna (div) */
-.columna {
-  height: 50vh;
-  border-radius: 10px;
-  border: 5px solid black;
-  background-color: lightgray;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-/*tytul kolumny (kandydata) */
-.title_in_column {
-  font-family: "Tilt Warp", cursive;
-  letter-spacing: 2px;
-  font-size: 40px;
-}
 /*guziki glowne, pod "admin"*/
 .przycisk {
+  font-family: "Tilt Warp", cursive;
   text-align: center;
   border-radius: 10px;
   font-size: 20px;
   padding: 10px;
   cursor: pointer;
+  transition: transform 0.3s;
+  border: 3px solid black;
+}
+.przycisk:hover {
+  transform: translateY(-10px);
 }
 /*wyglad jednego glosu w kolumnie*/
 .wynik {
@@ -66,6 +56,8 @@ body {
   font-size: 20px;
   padding: 10px;
   cursor: pointer;
+  position: absolute;
+  bottom: 20px;
 }
 #dodawanie {
   display: flex;
@@ -77,10 +69,10 @@ body {
 }
 .div {
   position: relative;
-  border: 2px solid black;
-  background-color: rgb(172, 171, 171);
+  border: 5px solid black;
+  background-color: rgb(116, 115, 115);
   height: 50vh;
-  width: 20vw;
+  width: 23vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,7 +81,9 @@ body {
 }
 .tytul {
   font-family: "Tilt Warp", cursive;
-  font-size: 35px;
+  font-size: 32px;
+  position: absolute;
+  top: 5px;
 }
 .usun_kandydata {
   text-align: center;
@@ -112,6 +106,7 @@ body {
   flex-direction: column;
   overflow-y: auto;
   width: 90%;
+  height: 70%;
 }
 .div_tytul {
   display: flex;
@@ -128,11 +123,12 @@ body {
 #admin_text {
   position: relative;
   width: 100vw;
+  font-size: 25px;
 }
 #powrot {
   position: absolute;
-  left: 10px;
-  top: 10px;
+  left: 20px;
+  top: 20px;
 }
 .haslo {
   font-family: "Tilt Warp", cursive;
