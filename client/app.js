@@ -1,5 +1,7 @@
 //funkcja wysyla glos do servera, sprawdza czy dane zostaly wypenione
-var kandydaci = []
+
+make_kandydat()
+//sprawdza wybor
 async function zaglosuj() {
   const bledy = document.getElementById("bledy")
   const wybor = document.getElementsByName("wybor")
@@ -19,41 +21,45 @@ async function zaglosuj() {
         bledy.innerHTML = ""
         submit(pesel, selectedWybor)
       }
-    } else {
-      bledy.innerHTML = "nie wybrano kandydata"
     }
   })
 }
 
 async function make_kandydat() {
+  document.getElementById("lista_kandydatow").innerHTML = ""
+
   var data = await fetch(`${base_url}/lista_kandydatow`)
   kandydaci = await data.json()
+  console.log(kandydaci)
 
-  document.getElementById("lista_kandydatow").innerHTML = ""
   for (var i = 0; i <= kandydaci.length - 1; i++) {
     var kandydat = kandydaci[i].kandydat
-
-    const div = document.createElement("div")
-    div.classList.add("div_kandydat")
-
-    const input = document.createElement("input")
-    input.classList.add("kandydat")
-    input.setAttribute("type", "radio")
-    input.setAttribute("name", "wybor")
-    input.setAttribute("id", `${kandydat}`)
-    input.setAttribute("value", `${kandydat}`)
-
-    const label = document.createElement("label")
-    label.classList.add("kandydat_label")
-    label.setAttribute("for", `${kandydat}`)
-    label.innerHTML = `${kandydat}`
-
-    div.appendChild(input)
-    div.appendChild(label)
-    document.getElementById("lista_kandydatow").appendChild(div)
+    stworz_kandydata(kandydat)
   }
 }
 
+//tworzy radio buttona z kandydatem
+function stworz_kandydata(kandydat) {
+  const div = document.createElement("div")
+  div.classList.add("div_kandydat")
+
+  const input = document.createElement("input")
+  input.classList.add("kandydat")
+  input.setAttribute("type", "radio")
+  input.setAttribute("name", "wybor")
+  input.setAttribute("id", `${kandydat}`)
+  input.setAttribute("value", `${kandydat}`)
+
+  const label = document.createElement("label")
+  label.classList.add("kandydat_label")
+  label.setAttribute("for", `${kandydat}`)
+  label.innerHTML = `${kandydat}`
+
+  div.appendChild(input)
+  div.appendChild(label)
+  document.getElementById("lista_kandydatow").appendChild(div)
+}
+//wysyla glos do servera
 async function submit(pesel, selecetedWybor) {
   //(dane wprowadzone) url to adres endpointa,
   const url = `${base_url}/submit/${selecetedWybor}/${pesel}`
@@ -66,8 +72,7 @@ async function submit(pesel, selecetedWybor) {
   alert("ZAGLOSOWANO WYSLANY")
   location.reload()
 }
-
-make_kandydat()
+//blokada admina haslem z bazy
 async function admin_test() {
   var data = await fetch(`${base_url}/pokaz_haslo`)
   var json = await data.json()

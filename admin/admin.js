@@ -1,56 +1,77 @@
 const base_url = "http://localhost:3000"
+const all = document.getElementById("all")
+const wykres = document.getElementById("wykres")
 var kandydaci = []
 var wyniki = []
-const all = document.getElementById("all")
 var div_wynik
 var glosy = []
 var gora = []
+pokaz_kandydatow()
 
 async function pokaz_kandydatow() {
+  pobierzKandydatow()
+  pobierzWyniki()
+
+  console.log(kandydaci)
+  wykres.innerHTML = ""
+  all.innerHTML = ""
+
+  przygotuj_wykres()
+
+  for (var i = 0; i <= kandydaci.length - 1; i++) {
+    var kandydat = kandydaci[i].kandydat
+
+    gora.push(kandydat)
+    glosy.push(kandydaci[i].liczba_glosow)
+
+    make_div_kandydata(kandydat)
+    pokaz_wyniki(kandydat)
+  }
+  Charte()
+}
+
+function make_div_kandydata(kandydat) {
+  const div = document.createElement("div")
+  div.classList.add("div")
+
+  const div_tytul = document.createElement("div")
+  div_tytul.classList.add("div_tytul")
+  div_wynik = document.createElement("div")
+  div_wynik.classList.add("div_wynik")
+
+  const tytul = document.createElement("h1")
+  tytul.innerHTML = kandydat
+  tytul.classList.add("tytul")
+  div_tytul.appendChild(tytul)
+
+  const delete_btn = document.createElement("button")
+  delete_btn.innerHTML = "usun kandydata"
+  delete_btn.setAttribute("onclick", `usun_kandydata("${kandydat}")`)
+  delete_btn.setAttribute("class", "przycisk remove_btn")
+  div_tytul.appendChild(delete_btn)
+
+  div.appendChild(div_tytul)
+  div.appendChild(div_wynik)
+  all.appendChild(div)
+}
+
+async function pobierzKandydatow() {
   //pobranie danych z serwera, serwer z bazy danych (/server/index.js)
   var data_kandydaci = await fetch(`${base_url}/lista_kandydatow`)
   kandydaci = await data_kandydaci.json()
+}
+async function pobierzWyniki() {
   //pobranie danych z serwera, serwer z bazy danych (/server/index.js)
   var data_wyniki = await fetch(`${base_url}/wyniki`)
   wyniki = await data_wyniki.json()
-
-  console.log(kandydaci)
-  document.getElementById("wykres").innerHTML = ""
+}
+function przygotuj_wykres() {
+  gora = []
+  glosy = []
+  //customowy element w ktorym robi sie wykres
   const canvas = document.createElement("canvas")
   canvas.setAttribute("id", "myChart")
   document.getElementById("wykres").appendChild(canvas)
-  all.innerHTML = ""
-  gora = []
-  glosy = []
-  for (var i = 0; i <= kandydaci.length - 1; i++) {
-    gora.push(kandydaci[i].kandydat)
-    glosy.push(kandydaci[i].liczba_glosow)
-
-    const div = document.createElement("div")
-    div.classList.add("div")
-
-    const div_tytul = document.createElement("div")
-    div_tytul.classList.add("div_tytul")
-    div_wynik = document.createElement("div")
-    div_wynik.classList.add("div_wynik")
-
-    const tytul = document.createElement("h1")
-    tytul.innerHTML = kandydaci[i].kandydat
-    tytul.classList.add("tytul")
-    div_tytul.appendChild(tytul)
-
-    const delete_btn = document.createElement("button")
-    delete_btn.innerHTML = "usun kandydata"
-    delete_btn.setAttribute("onclick", `usun_kandydata("${kandydaci[i].kandydat}")`)
-    delete_btn.setAttribute("class", "przycisk remove_btn")
-    div_tytul.appendChild(delete_btn)
-
-    pokaz_wyniki(kandydaci[i].kandydat)
-    div.appendChild(div_tytul)
-    div.appendChild(div_wynik)
-    all.appendChild(div)
-  }
-  Charte()
 }
 //usuwa wszystkie rekordy z tabeli spis
 async function remove_result() {
@@ -60,7 +81,6 @@ async function remove_result() {
   pokaz_kandydatow()
 }
 //wyslanie zapytania do servera o dodanie kandydata, nazwa z inputa
-
 async function dodaj_kandydata() {
   const input = document.getElementById("dodaj")
 
@@ -82,7 +102,7 @@ function pokaz_wyniki(kandydat) {
     }
   }
 }
-
+//tworzy wykres
 function Charte() {
   const ctx = document.getElementById("myChart")
   char = new Chart(ctx, {
@@ -127,6 +147,7 @@ async function usun_kandydata(kandydat) {
   await fetch(url)
   pokaz_kandydatow()
 }
+//tworzy miejsce do dodania kandydata
 function make_dodaj() {
   all.innerHTML = ""
   const div = document.createElement("div")
@@ -153,6 +174,7 @@ function make_dodaj() {
   div.appendChild(btn)
   all.appendChild(div)
 }
+//tworzy miejsce do zmieniania hasla
 async function pokaz_zmien_haslo() {
   var data = await fetch(`${base_url}/pokaz_haslo`)
   var json = await data.json()
@@ -181,6 +203,7 @@ async function pokaz_zmien_haslo() {
   div.appendChild(btn)
   all.appendChild(div)
 }
+//obsluguje zmienianie hasla w bazie danych przez server
 async function zmien_haslo() {
   const new_haslo = document.getElementById("haslo").value
   console.log(new_haslo)
@@ -190,4 +213,3 @@ async function zmien_haslo() {
 
   pokaz_kandydatow()
 }
-pokaz_kandydatow()
