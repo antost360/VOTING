@@ -38,20 +38,9 @@ body {
   -webkit-text-stroke: 1.5px rgb(0, 0, 0);
 }
 /*calosc od jednego kandydata*/
-/*kandydat LABEL*/
-.kandydat_label {
-  font-family: "Tilt Warp", cursive;
-  color: white;
-  -webkit-text-stroke: 1.5px rgb(0, 0, 0);
-  font-size: 25px;
-}
-/*kandydat INPUT*/
-.kandydat {
-  height: 20px;
-  width: 20px;
-}
 /*kandydat DIV*/
 .div_kandydat {
+  position: relative;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -76,13 +65,20 @@ body {
 }
 /*INPUT pesel*/
 #pesel {
-  font-size: 20px;
+  font-size: 30px;
+  padding: 10px;
   font-family: "Tilt Warp", cursive;
-  background-color: white;
+  background-color: rgb(141, 140, 140);
   text-align: center;
-  border-radius: 10px;
+  border-radius: 15px;
   height: 30px;
   width: 200px;
+  transition: background-color 0.4s;
+  border: 5px solid black;
+  transition: background-color 0.3s ease-in-out;
+}
+#pesel:focus {
+  background-color: skyblue;
 }
 /*guzik od wyslanie*/
 .przycisk {
@@ -100,4 +96,43 @@ body {
   position: absolute;
   left: 10px;
   top: 10px;
+}
+.label {
+  position: relative;
+  font-family: "Tilt Warp", cursive;
+  color: rgb(255, 255, 255);
+  -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+  font-size: 28px;
+  cursor: pointer;
+  border: 5px solid black;
+  height: 60px;
+  width: 350px;
+  min-height: 60px;
+  min-width: 150px;
+  padding-left: 15px;
+  padding-right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background-color: rgb(141, 140, 140);
+  transition: background-color 0.3s ease-in-out;
+}
+.kandydat {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  display: none;
+}
+
+.label:hover {
+  background-color: lightgray;
+}
+#pesel:hover {
+  background-color: lightgray;
+}
+.kandydat:checked + .label {
+  background-color: skyblue;
 }

@@ -40,17 +40,27 @@ app.get("/submit/:selectedWybor/:pesel/", (req, res) => {
   const sql2 = `UPDATE ${admin_table} SET liczba_glosow = liczba_glosow + 1 WHERE kandydat = "${selecetedWybor}"`
   con.query(sql2, (err, result, fields) => {
     if (err) console.log(err)
-    else res.send("dodano glos do kandydaci")
+    else console.log("zwiekszenie liczby glosow")
   })
+
+  res.send("zapytanie o submit")
 })
 
 //do admina, usuwanie wszystkich rekordow
 app.get("/remove_result", (req, res) => {
-  const sql = `DELETE FROM ${table}`
+  const sql = `DELETE FROM ${table} WHERE 1`
   con.query(sql, (err, result, fields) => {
     if (err) console.log(err)
-    else res.send("usunieto wszystko")
+    else console.log(`usunieto z ${table}`)
   })
+
+  const sql2 = `UPDATE ${admin_table} SET liczba_glosow = 0`
+  con.query(sql2, (err, result, fields) => {
+    if (err) console.log(err)
+    else console.log(`usunieto z ${admin_table}`)
+  })
+
+  res.send("zapytanie o usuwanie")
 })
 app.get("/wyniki", (req, res) => {
   const sql = `select pesel_wyborcy, kandydat from ${table}`

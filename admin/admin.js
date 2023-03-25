@@ -9,8 +9,12 @@ var gora = []
 pokaz_kandydatow()
 
 async function pokaz_kandydatow() {
-  pobierzKandydatow()
-  pobierzWyniki()
+  //pobranie danych z serwera, serwer z bazy danych (/server/index.js)
+  var data_kandydaci = await fetch(`${base_url}/lista_kandydatow`)
+  kandydaci = await data_kandydaci.json()
+  //pobranie danych z serwera, serwer z bazy danych (/server/index.js)
+  var data_wyniki = await fetch(`${base_url}/wyniki`)
+  wyniki = await data_wyniki.json()
 
   console.log(kandydaci)
   wykres.innerHTML = ""
@@ -53,17 +57,6 @@ function make_div_kandydata(kandydat) {
   div.appendChild(div_tytul)
   div.appendChild(div_wynik)
   all.appendChild(div)
-}
-
-async function pobierzKandydatow() {
-  //pobranie danych z serwera, serwer z bazy danych (/server/index.js)
-  var data_kandydaci = await fetch(`${base_url}/lista_kandydatow`)
-  kandydaci = await data_kandydaci.json()
-}
-async function pobierzWyniki() {
-  //pobranie danych z serwera, serwer z bazy danych (/server/index.js)
-  var data_wyniki = await fetch(`${base_url}/wyniki`)
-  wyniki = await data_wyniki.json()
 }
 function przygotuj_wykres() {
   gora = []
@@ -144,6 +137,7 @@ function Charte() {
 async function usun_kandydata(kandydat) {
   var wybrany = kandydat
   const url = `${base_url}/usun/${wybrany}`
+
   await fetch(url)
   pokaz_kandydatow()
 }

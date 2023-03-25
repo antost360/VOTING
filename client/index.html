@@ -6,28 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VOTING</title>
     <link rel="stylesheet" href="style.css" />
+    <script defer src="config.js"></script>
+    <script defer src="app.js"></script>
   </head>
   <body>
-    
     <div id="all" class="flex_center">
-      
-        <button id="admin_btn" onclick="admin_test()">ADMIN</button>
+      <button id="admin_btn" onclick="admin_test()">ADMIN</button>
 
-      
       <div id="div_lista_kandydatow" class="flex_center">
         <h1 class="title">ZAGLOSUJ NA KANDYDATA</h1>
-        <div id="lista_kandydatow">          
-        </div>
+
+        <div id="lista_kandydatow"></div>
         <!--miejsce do wpisania pesela-->
         <div id="input_pesel">
-          <label id="pesel_label" for="pesel">pesel</label>
-          <input type="text" id="pesel" maxlength="11" required />
+          <label id="pesel_label" for="pesel">
+            <input type="text" id="pesel" maxlength="11" placeholder="pesel" />
+          </label>
         </div>
         <!--wyslanie glosu-->
+        <br />
         <button id="zaglosuj_btn" type="submit" class="przycisk" onclick="zaglosuj()">ZAGLOSUJ</button>
-      <h1 class="title" id="bledy"></h1>
+      </div>
     </div>
-    <script src="config.js"></script>
-    <script src="app.js"></script>
   </body>
 </html>

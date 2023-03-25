@@ -3,26 +3,36 @@
 make_kandydat()
 //sprawdza wybor
 async function zaglosuj() {
-  const bledy = document.getElementById("bledy")
   const wybor = document.getElementsByName("wybor")
   const pesel = document.getElementById("pesel").value
   var selectedWybor
 
-  //(ktos zostal wybrany) sprawdzenie dokladnie ktory kandydat zostal wybrany
   wybor.forEach((wybor) => {
     if (wybor.checked) {
       selectedWybor = wybor.value
       console.log("selected wybor")
-      //konstrola czy pesel zostal wpisany, jesli nie to alert i nie przechodzi dalej
+
       if (pesel == "") {
-        console.log("nieprawidlowy pesel")
-        bledy.innerHTML = "nie wpisano peselu"
-      } else {
-        bledy.innerHTML = ""
-        submit(pesel, selectedWybor)
+        location.reload()
+        alert("nie wpisano peselu")
+        return
       }
+      submit(pesel, selectedWybor)
     }
   })
+
+  if (pesel == "" && selectedWybor == null) {
+    alert("nie wybrano ani kandydata ani peselu")
+    return
+  }
+  if (pesel == "") {
+    alert("nie wpisano peselu")
+    return
+  }
+  if (selectedWybor == null) {
+    alert("nie wybrano kandydata")
+    return
+  }
 }
 
 async function make_kandydat() {
@@ -44,14 +54,14 @@ function stworz_kandydata(kandydat) {
   div.classList.add("div_kandydat")
 
   const input = document.createElement("input")
-  input.classList.add("kandydat")
+  input.setAttribute("class", "kandydat")
   input.setAttribute("type", "radio")
   input.setAttribute("name", "wybor")
   input.setAttribute("id", `${kandydat}`)
   input.setAttribute("value", `${kandydat}`)
 
   const label = document.createElement("label")
-  label.classList.add("kandydat_label")
+  label.setAttribute("class", "label")
   label.setAttribute("for", `${kandydat}`)
   label.innerHTML = `${kandydat}`
 
