@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 20 Mar 2023, 06:32
+-- Czas generowania: 25 Mar 2023, 11:38
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -36,8 +36,8 @@ CREATE TABLE `admin_haslo` (
 --
 
 INSERT INTO `admin_haslo` (`haslo`) VALUES
-('admin'),
-('admin');
+('haslo'),
+('haslo');
 
 -- --------------------------------------------------------
 
@@ -47,18 +47,18 @@ INSERT INTO `admin_haslo` (`haslo`) VALUES
 
 CREATE TABLE `kandydaci` (
   `id` int(11) NOT NULL,
-  `kandydat` text NOT NULL
+  `kandydat` text NOT NULL,
+  `liczba_glosow` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Zrzut danych tabeli `kandydaci`
 --
 
-INSERT INTO `kandydaci` (`id`, `kandydat`) VALUES
-(25, 'Ania'),
-(26, 'kacperek'),
-(27, 'antoni'),
-(28, 'martyna');
+INSERT INTO `kandydaci` (`id`, `kandydat`, `liczba_glosow`) VALUES
+(57, 'Antoni Ostrowski', 1),
+(58, 'Kacper Duda Trzaskowski', 1),
+(61, 'Dariusz Kowalski', 2);
 
 -- --------------------------------------------------------
 
@@ -77,8 +77,10 @@ CREATE TABLE `spis` (
 --
 
 INSERT INTO `spis` (`id`, `kandydat`, `pesel_wyborcy`) VALUES
-(53, 'kacperek', '333'),
-(54, 'kacperek', '33');
+(139, 'Antoni Ostrowski', '15136316316'),
+(140, 'Kacper Duda Trzaskowski', '62424664264'),
+(141, 'Dariusz Kowalski', '39075935639'),
+(142, 'Dariusz Kowalski', '83656356853');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -104,13 +106,13 @@ ALTER TABLE `spis`
 -- AUTO_INCREMENT dla tabeli `kandydaci`
 --
 ALTER TABLE `kandydaci`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT dla tabeli `spis`
 --
 ALTER TABLE `spis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
