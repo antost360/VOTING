@@ -25,7 +25,19 @@
         </div>
         <!--wyslanie glosu-->
         <br />
-        <button id="zaglosuj_btn" type="submit" class="przycisk" onclick="zaglosuj()">ZAGLOSUJ</button>
+        <button id="zaglosuj_btn" class="przycisk" onclick="openPopup()">ZAGLOSUJ</button>
+
+        <div class="popup" id="popup_id">
+          <div id="inside_popup">
+            <h1>Czy chcesz wyslac glos</h1>
+            <div id="guziki_popup">
+              <button onclick="closePopup()" class="popup_btn" id="anuluj_btn" style="background-color: tomato">anuluj</button>
+              <button onclick="zaglosuj()" class="popup_btn" id="wyslij_glos_btn" style="background-color: lightgreen">
+                wyslij glos
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </body>

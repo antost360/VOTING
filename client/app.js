@@ -1,4 +1,6 @@
-//funkcja wysyla glos do servera, sprawdza czy dane zostaly wypenione
+const pesel_id = document.querySelector("#pesel")
+const lista_kandydatow_id = document.querySelector("#lista_kandydatow")
+const popup = document.getElementById("popup_id")
 
 make_kandydat()
 //sprawdza wybor
@@ -12,27 +14,27 @@ async function zaglosuj() {
       selectedWybor = wybor.value
       console.log("selected wybor")
 
-      if (pesel == "") {
-        location.reload()
-        alert("nie wpisano peselu")
-        return
-      }
       submit(pesel, selectedWybor)
     }
   })
 
   if (pesel == "" && selectedWybor == null) {
-    alert("nie wybrano ani kandydata ani peselu")
+    closePopup()
+    blad(pesel_id)
+    blad(lista_kandydatow_id)
     return
   }
   if (pesel == "") {
-    alert("nie wpisano peselu")
+    closePopup()
+    blad(pesel_id)
     return
   }
   if (selectedWybor == null) {
-    alert("nie wybrano kandydata")
+    closePopup()
+    blad(lista_kandydatow_id)
     return
   }
+  location.reload()
 }
 
 async function make_kandydat() {
@@ -76,11 +78,6 @@ async function submit(pesel, selecetedWybor) {
   //wyslanie zapytania do servera o dodanie glosu do bazy danych
   await fetch(url)
   console.log("url wyslany")
-
-  //zakonczenie glosowania
-
-  alert("ZAGLOSOWANO WYSLANY")
-  location.reload()
 }
 //blokada admina haslem z bazy
 async function admin_test() {
@@ -96,4 +93,19 @@ async function admin_test() {
   } else {
     window.location.href = "../admin/admin.html"
   }
+}
+function blad(miejsce) {
+  miejsce.style.borderColor = "#cc0000"
+}
+function usun_blad(miejsce) {
+  miejsce.style.borderColor = ""
+}
+
+function openPopup() {
+  popup.classList.add("open-popup")
+  console.log("open")
+}
+function closePopup() {
+  popup.classList.remove("open-popup")
+  console.log("close")
 }

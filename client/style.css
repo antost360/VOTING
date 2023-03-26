@@ -3,6 +3,7 @@ body {
   box-sizing: border-box;
   margin: 0;
   height: 100vh;
+  overflow: hidden;
 }
 .flex_center {
   display: flex;
@@ -28,6 +29,9 @@ body {
   gap: 20px;
   flex-direction: column;
   margin: 30px;
+  border: 5px solid #0000;
+  border-radius: 20px;
+  padding: 25px;
 }
 /*tytul, "zalglosuj na kandydata"*/
 .title {
@@ -82,11 +86,12 @@ body {
 }
 /*guzik od wyslanie*/
 .przycisk {
-  padding: 5px;
+  padding: 10px;
   font-size: 20px;
   border-radius: 10px;
   font-family: "Tilt Warp", cursive;
   cursor: pointer;
+  box-shadow: 0px 0px 5px;
 }
 #admin_btn {
   cursor: pointer;
@@ -135,4 +140,56 @@ body {
 }
 .kandydat:checked + .label {
   background-color: skyblue;
+}
+.popup {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.367);
+  border-radius: 15px;
+  border: 2px solid black;
+  font-family: "Tilt Warp", cursive;
+  padding: 0 20px 0;
+  box-shadow: 0px 0px 4px;
+  visibility: hidden;
+  transform: scale(0.1);
+}
+
+#inside_popup {
+  background-color: white;
+  border-radius: 15px;
+  border: 2px solid black;
+  font-family: "Tilt Warp", cursive;
+  padding: 0 20px 0;
+  box-shadow: 0px 0px 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  width: 22vw;
+  height: 22vh;
+}
+.popup_btn {
+  border: 2px solid black;
+  font-family: "Tilt Warp", cursive;
+  padding: 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0px 0px 2px;
+}
+#guziki_popup {
+  margin-top: 10px;
+  display: flex;
+  gap: 40px;
+}
+.open-popup {
+  visibility: visible;
+  transform: scale(1);
 }
