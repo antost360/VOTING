@@ -7,7 +7,31 @@
     <title>ADMIN</title>
     <link rel="stylesheet" href="admin.css" />
   </head>
-  <body>
+  <body id="body">
+    <div class="popup_haslo" id="popup_haslo_id">
+      <div id="inside_popup_haslo">
+        <h1>Wprowadz nazwe kandydata</h1>
+        <input type="text" id="haslo" placeholder="kandydat" />
+        <div id="guziki_popup_haslo">
+          <button onclick="closePopup_haslo()" class="popup_btn" id="anuluj_btn" style="background-color: tomato">anuluj</button>
+          <button onclick="dodaj_kandydata()" class="popup_btn" id="wyslij_glos_btn" style="background-color: lightgreen">
+            dodaj
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="popup_glos" id="popup_glos_id">
+      <div id="inside_popup_glos">
+        <h1>Wprowadz nowe haslo</h1>
+        <input type="password" id="nowe_haslo" placeholder="nowe haslo" />
+        <div id="guziki_popup">
+          <button onclick="closePopup_glos()" class="popup_btn" id="anuluj_btn" style="background-color: tomato">anuluj</button>
+          <button onclick="zmien_haslo()" class="popup_btn" id="wyslij_glos_btn" style="background-color: lightgreen">
+            zmien haslo
+          </button>
+        </div>
+      </div>
+    </div>
     <div id="admin_title">
       <div id="admin_text">
         <h1>ADMIN</h1>
@@ -17,15 +41,15 @@
           <button class="przycisk" id="powrot">POWROT DO CLIENTA</button>
         </a>
         <button class="przycisk" onclick="pokaz_kandydatow()">pokaz najświeższe wyniki</button>
-        <button class="przycisk" onclick="make_dodaj()">dodaj kandydata</button>
+        <button class="przycisk" onclick="openPopup_haslo()">dodaj kandydata</button>
+        <button class="przycisk" onclick="openPopup_glos()">zmien haslo</button>
         <button class="przycisk" onclick="remove_result()">usun glosy</button>
-        <button class="przycisk" onclick="pokaz_zmien_haslo()">zmien haslo</button>
-
         <a href="#miejsce_na_wykres">
           <button class="przycisk">wykres ⬇⬇⬇</button>
         </a>
       </div>
     </div>
+
     <!--glowny pojemnik na "tabele"-->
     <div id="all"></div>
     <div id="miejsce_na_wykres">
@@ -34,7 +58,6 @@
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <script src="admin.js"></script>
   </body>
 </html>

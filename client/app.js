@@ -1,7 +1,8 @@
 const pesel_id = document.querySelector("#pesel")
 const lista_kandydatow_id = document.querySelector("#lista_kandydatow")
-const popup = document.getElementById("popup_id")
-
+const haslo = document.getElementById("haslo")
+const popup_glos = document.getElementById("popup_glos_id")
+const popup_haslo = document.getElementById("popup_haslo_id")
 make_kandydat()
 //sprawdza wybor
 async function zaglosuj() {
@@ -19,24 +20,23 @@ async function zaglosuj() {
   })
 
   if (pesel == "" && selectedWybor == null) {
-    closePopup()
+    closePopup_glos()
     blad(pesel_id)
     blad(lista_kandydatow_id)
     return
   }
   if (pesel == "") {
-    closePopup()
+    closePopup_glos()
     blad(pesel_id)
     return
   }
   if (selectedWybor == null) {
-    closePopup()
+    closePopup_glos()
     blad(lista_kandydatow_id)
     return
   }
   location.reload()
 }
-
 async function make_kandydat() {
   document.getElementById("lista_kandydatow").innerHTML = ""
 
@@ -49,7 +49,6 @@ async function make_kandydat() {
     stworz_kandydata(kandydat)
   }
 }
-
 //tworzy radio buttona z kandydatem
 function stworz_kandydata(kandydat) {
   const div = document.createElement("div")
@@ -80,32 +79,46 @@ async function submit(pesel, selecetedWybor) {
   console.log("url wyslany")
 }
 //blokada admina haslem z bazy
+haslo.addEventListener("keydown", function (e) {
+  if (e.code === "Enter") {
+    admin_test()
+  }
+})
 async function admin_test() {
   var data = await fetch(`${base_url}/pokaz_haslo`)
   var json = await data.json()
   console.log(json)
-
-  var password = prompt("podaj haslo do admina")
+  var password = haslo.value
 
   if (password != json[0].haslo) {
-    alert("niepoprawne haslo")
+    haslo.style.border = "5px solid tomato"
     return
   } else {
     window.location.href = "../admin/admin.html"
   }
 }
+//pokazanie jakie dane nie zostaly wpisane
 function blad(miejsce) {
   miejsce.style.borderColor = "#cc0000"
 }
 function usun_blad(miejsce) {
   miejsce.style.borderColor = ""
 }
-
-function openPopup() {
-  popup.classList.add("open-popup")
+//otwiera okienko do wyslania glosu
+function openPopup_glos() {
+  popup_glos.classList.add("open-popup_glos")
   console.log("open")
 }
-function closePopup() {
-  popup.classList.remove("open-popup")
+function closePopup_glos() {
+  popup_glos.classList.remove("open-popup_glos")
+  console.log("close")
+}
+//otwiera okienko do wpowadzenia haslo do admina
+function openPopup_haslo() {
+  popup_haslo.classList.add("open-popup_haslo")
+  console.log("open")
+}
+function closePopup_haslo() {
+  popup_haslo.classList.remove("open-popup_haslo")
   console.log("close")
 }

@@ -140,3 +140,124 @@ body {
 #wykres {
   width: 50vw;
 }
+.popup_btn {
+  border: 2px solid black;
+  font-family: "Tilt Warp", cursive;
+  padding: 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0px 0px 2px;
+  transition: transform 0.2s ease-in-out;
+}
+.popup_btn:hover {
+  transform: scale(1.1);
+}
+/*haslo*/
+.popup_haslo {
+  z-index: 1;
+  cursor: not-allowed;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.644);
+  border-radius: 15px;
+  border: 2px solid black;
+  font-family: "Tilt Warp", cursive;
+  padding: 0 20px 0;
+  box-shadow: 0px 0px 4px;
+  visibility: hidden;
+  transform: scale(0.1);
+}
+#inside_popup_haslo {
+  cursor: auto;
+  background-color: white;
+  border-radius: 15px;
+  border: 2px solid black;
+  font-family: "Tilt Warp", cursive;
+  padding: 0 20px 0;
+  box-shadow: 0px 0px 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  width: 25vw;
+  height: 25vh;
+}
+#guziki_popup_haslo {
+  margin-top: 10px;
+  display: flex;
+  gap: 40px;
+}
+.open-popup_haslo {
+  visibility: visible;
+  transform: scale(1);
+}
+#haslo {
+  margin: 15px;
+  text-align: center;
+  border-radius: 15px;
+  font-size: 25px;
+  height: 50px;
+  font-family: "Tilt Warp", cursive;
+}
+/*glosy*/
+.popup_glos {
+  z-index: 1;
+  cursor: not-allowed;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.644);
+  border-radius: 15px;
+  border: 2px solid black;
+  font-family: "Tilt Warp", cursive;
+  padding: 0 20px 0;
+  box-shadow: 0px 0px 4px;
+  visibility: hidden;
+  transform: scale(0.1);
+}
+#inside_popup_glos {
+  cursor: auto;
+  background-color: white;
+  border-radius: 15px;
+  border: 2px solid black;
+  font-family: "Tilt Warp", cursive;
+  padding: 0 20px 0;
+  box-shadow: 0px 0px 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  width: 22vw;
+  height: 22vh;
+}
+#guziki_popup {
+  margin-top: 10px;
+  display: flex;
+  gap: 40px;
+}
+.open-popup_glos {
+  visibility: visible;
+  transform: scale(1);
+}
+#nowe_haslo {
+  margin: 15px;
+  text-align: center;
+  border-radius: 15px;
+  font-size: 25px;
+  height: 50px;
+  font-family: "Tilt Warp", cursive;
+}
