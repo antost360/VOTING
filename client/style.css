@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap");
 body {
+  background-color: rgba(0, 0, 0, 0.719);
   box-sizing: border-box;
   margin: 0;
-  height: 100vh;
-  overflow: hidden;
+
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .flex_center {
   display: flex;
@@ -14,21 +16,24 @@ body {
 /*glowny pojemnik*/
 #all {
   position: relative;
-  background-color: rgba(0, 0, 0, 0.719);
-  height: 100vh;
   width: 100vw;
+  height: 100vh;
 }
+
 /*wszystko, radio btns, pesel, guzik od wyslania */
 #div_lista_kandydatow {
   gap: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /*lista, same wybory kandydatow*/
 #lista_kandydatow {
-  list-style: none;
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 20px;
-  flex-direction: column;
-  margin: 30px;
   border: 5px solid #0000;
   border-radius: 20px;
   padding: 25px;
@@ -50,8 +55,8 @@ body {
   align-content: center;
   flex-direction: row;
   gap: 10px;
+  height: 70px;
 }
-
 /*input pesel LABEL*/
 #pesel_label {
   font-family: "Tilt Warp", cursive;
@@ -92,6 +97,11 @@ body {
   font-family: "Tilt Warp", cursive;
   cursor: pointer;
   box-shadow: 0px 0px 5px;
+  transition: transform 0.2s ease-out, background-color 0.2s ease-out;
+}
+.przycisk:hover {
+  transform: scale(1.2);
+  background-color: skyblue;
 }
 #admin_btn {
   cursor: pointer;
@@ -110,7 +120,7 @@ body {
   font-size: 28px;
   cursor: pointer;
   border: 5px solid black;
-  height: 60px;
+  height: 70px;
   width: 350px;
   min-height: 60px;
   min-width: 150px;
@@ -145,6 +155,7 @@ body {
 .popup_glos {
   cursor: not-allowed;
   position: absolute;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -167,6 +178,8 @@ body {
   border-radius: 15px;
   border: 2px solid black;
   font-family: "Tilt Warp", cursive;
+  box-shadow: 0px 0px 20px black;
+  border: 5px solid black;
   padding: 0 20px 0;
   box-shadow: 0px 0px 4px;
   display: flex;
@@ -204,6 +217,7 @@ body {
 .popup_haslo {
   cursor: not-allowed;
   position: absolute;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -224,8 +238,9 @@ body {
   cursor: auto;
   background-color: white;
   border-radius: 15px;
-  border: 2px solid black;
   font-family: "Tilt Warp", cursive;
+  box-shadow: 0px 0px 20px black;
+  border: 5px solid black;
   padding: 0 20px 0;
   box-shadow: 0px 0px 4px;
   display: flex;

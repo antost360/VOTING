@@ -9,13 +9,12 @@
     <script defer src="config.js"></script>
     <script defer src="app.js"></script>
   </head>
-  <body>
+  <body id="body">
     <div id="all" class="flex_center">
-      <button id="admin_btn" onclick="openPopup_haslo()">ADMIN</button>
+      <button id="admin_btn" class="przycisk" onclick="openPopup_haslo()">ADMIN</button>
 
       <div id="div_lista_kandydatow" class="flex_center">
         <h1 class="title">ZAGLOSUJ NA KANDYDATA</h1>
-
         <div id="lista_kandydatow"></div>
         <!--miejsce do wpisania pesela-->
         <div id="input_pesel">

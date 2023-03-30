@@ -1,3 +1,4 @@
+const body = document.getElementById("body")
 const pesel_id = document.querySelector("#pesel")
 const lista_kandydatow_id = document.querySelector("#lista_kandydatow")
 const haslo = document.getElementById("haslo")
@@ -107,18 +108,25 @@ function usun_blad(miejsce) {
 //otwiera okienko do wyslania glosu
 function openPopup_glos() {
   popup_glos.classList.add("open-popup_glos")
-  console.log("open")
+  body.style.overflowY = "hidden"
 }
 function closePopup_glos() {
   popup_glos.classList.remove("open-popup_glos")
-  console.log("close")
+  body.style.overflowY = "auto"
 }
 //otwiera okienko do wpowadzenia haslo do admina
 function openPopup_haslo() {
   popup_haslo.classList.add("open-popup_haslo")
-  console.log("open")
+  body.style.overflowY = "hidden"
+  haslo.focus()
 }
 function closePopup_haslo() {
   popup_haslo.classList.remove("open-popup_haslo")
-  console.log("close")
+  body.style.overflowY = "auto"
 }
+document.addEventListener("keydown", function (e) {
+  if (e.code === "Escape") {
+    closePopup_haslo()
+    closePopup_glos()
+  }
+})
