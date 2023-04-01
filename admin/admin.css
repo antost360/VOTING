@@ -156,8 +156,14 @@ body {
 .popup_btn:hover {
   transform: scale(1.1);
 }
-/*haslo*/
-.popup_haslo {
+#pokaz_haslo_checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+/*nowy kandydat popup*/
+.popup_kandydat {
   z-index: 1;
   cursor: not-allowed;
   position: absolute;
@@ -169,7 +175,6 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.644);
-  border-radius: 15px;
   border: 2px solid black;
   font-family: "Tilt Warp", cursive;
   padding: 0 20px 0;
@@ -177,7 +182,7 @@ body {
   visibility: hidden;
   transform: scale(0.1);
 }
-#inside_popup_haslo {
+#inside_popup_kandydat {
   cursor: auto;
   background-color: white;
   border-radius: 15px;
@@ -193,16 +198,16 @@ body {
   width: 25vw;
   height: 25vh;
 }
-#guziki_popup_haslo {
+#guziki_popup_kandydat {
   margin-top: 10px;
   display: flex;
   gap: 40px;
 }
-.open-popup_haslo {
+.open-popup_kandydat {
   visibility: visible;
   transform: scale(1);
 }
-#haslo {
+#nowy_kandydat {
   margin: 15px;
   text-align: center;
   border-radius: 15px;
@@ -210,8 +215,8 @@ body {
   height: 50px;
   font-family: "Tilt Warp", cursive;
 }
-/*glosy*/
-.popup_glos {
+/*zmien haslo popup*/
+.popup_haslo {
   z-index: 1;
   cursor: not-allowed;
   position: absolute;
@@ -223,7 +228,6 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.644);
-  border-radius: 15px;
   border: 2px solid black;
   font-family: "Tilt Warp", cursive;
   padding: 0 20px 0;
@@ -231,13 +235,13 @@ body {
   visibility: hidden;
   transform: scale(0.1);
 }
-#inside_popup_glos {
+#inside_popup_haslo {
   cursor: auto;
   background-color: white;
   border-radius: 15px;
   border: 2px solid black;
   font-family: "Tilt Warp", cursive;
-  padding: 0 20px 0;
+  padding: 15px;
   box-shadow: 0px 0px 4px;
   display: flex;
   justify-content: center;
@@ -245,14 +249,14 @@ body {
   text-align: center;
   flex-direction: column;
   width: 22vw;
-  height: 22vh;
+  height: 27vh;
 }
-#guziki_popup {
+#guziki_popup_haslo {
   margin-top: 10px;
   display: flex;
   gap: 40px;
 }
-.open-popup_glos {
+.open-popup_haslo {
   visibility: visible;
   transform: scale(1);
 }

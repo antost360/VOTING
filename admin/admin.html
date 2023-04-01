@@ -8,24 +8,31 @@
     <link rel="stylesheet" href="admin.css" />
   </head>
   <body id="body">
-    <div class="popup_haslo" id="popup_haslo_id">
-      <div id="inside_popup_haslo">
+    <div class="popup_kandydat" id="popup_kandydat_id">
+      <div id="inside_popup_kandydat">
         <h1>Wprowadz nazwe kandydata</h1>
-        <input type="text" id="haslo" placeholder="kandydat" />
-        <div id="guziki_popup_haslo">
-          <button onclick="closePopup_haslo()" class="popup_btn" id="anuluj_btn" style="background-color: tomato">anuluj</button>
+        <input type="text" id="nowy_kandydat" placeholder="kandydat" />
+        <div id="guziki_popup_kandydat">
+          <button onclick="closePopup_kandydat()" class="popup_btn" id="anuluj_btn" style="background-color: tomato">
+            anuluj
+          </button>
           <button onclick="dodaj_kandydata()" class="popup_btn" id="wyslij_glos_btn" style="background-color: lightgreen">
             dodaj
           </button>
         </div>
       </div>
     </div>
-    <div class="popup_glos" id="popup_glos_id">
-      <div id="inside_popup_glos">
-        <h1>Wprowadz nowe haslo</h1>
+    <div class="popup_haslo" id="popup_haslo_id">
+      <div id="inside_popup_haslo">
+        <h1 id="tytul_haslo">Wprowadz nowe haslo</h1>
+        <h2 id="aktualne_haslo">aktualne haslo:</h2>
         <input type="password" id="nowe_haslo" placeholder="nowe haslo" />
-        <div id="guziki_popup">
-          <button onclick="closePopup_glos()" class="popup_btn" id="anuluj_btn" style="background-color: tomato">anuluj</button>
+        <div id="pokaz_haslo_checkbox">
+          <input type="checkbox" id="haslo_checkbox" onclick="show_password()" />
+          <label for="haslo_checkbox">pokaż hasło</label>
+        </div>
+        <div id="guziki_popup_haslo">
+          <button onclick="closePopup_haslo()" class="popup_btn" id="anuluj_btn" style="background-color: tomato">anuluj</button>
           <button onclick="zmien_haslo()" class="popup_btn" id="wyslij_glos_btn" style="background-color: lightgreen">
             zmien haslo
           </button>
@@ -40,13 +47,13 @@
         <a href="../client/index.html">
           <button class="przycisk" id="powrot">POWROT DO CLIENTA</button>
         </a>
-        <button class="przycisk" onclick="pokaz_kandydatow()">pokaz najświeższe wyniki</button>
-        <button class="przycisk" onclick="openPopup_haslo()">dodaj kandydata</button>
-        <button class="przycisk" onclick="openPopup_glos()">zmien haslo</button>
-        <button class="przycisk" onclick="remove_result()">usun glosy</button>
         <a href="#miejsce_na_wykres">
           <button class="przycisk">wykres ⬇⬇⬇</button>
         </a>
+        <button class="przycisk" onclick="pokaz_kandydatow()">pokaz najświeższe wyniki</button>
+        <button class="przycisk" onclick="openPopup_kandydat()">dodaj kandydata</button>
+        <button class="przycisk" onclick="openPopup_haslo()">zmien haslo</button>
+        <button class="przycisk" onclick="remove_result()">usun glosy</button>
       </div>
     </div>
 

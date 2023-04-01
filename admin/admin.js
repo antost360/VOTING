@@ -1,10 +1,11 @@
 const base_url = "http://localhost:3000"
 const all = document.getElementById("all")
 const wykres = document.getElementById("wykres")
-const popup_glos = document.getElementById("popup_glos_id")
 const popup_haslo = document.getElementById("popup_haslo_id")
-const haslo = document.getElementById("haslo")
+const popup_kandydat = document.getElementById("popup_kandydat_id")
+const new_kandydat = document.getElementById("nowy_kandydat")
 const nowe_haslo = document.getElementById("nowe_haslo")
+const tytul_haslo = document.getElementById("tytul_haslo")
 var data_kandydaci
 var kandydaci = []
 var wyniki = []
@@ -13,6 +14,20 @@ var glosy = []
 var gora = []
 pokaz_kandydatow()
 
+/**
+ * ! POBIERANIE, TWORZENIE i USUWANIE ELEMENTOW NA STRONIE
+ */
+//pokazuje pesela u odpowiedniego kanydata
+function pokaz_wyniki(kandydat) {
+  for (var i = 0; i <= wyniki.length - 1; i++) {
+    if (wyniki[i].kandydat == kandydat) {
+      const tytul = document.createElement("h1")
+      tytul.innerHTML = wyniki[i].pesel_wyborcy
+      tytul.classList.add("pesel")
+      div_wynik.appendChild(tytul)
+    }
+  }
+}
 async function pokaz_kandydatow() {
   //pobranie danych z serwera, serwer z bazy danych (/server/index.js)
   var data_kandydaci = await fetch(`${base_url}/lista_kandydatow`)
@@ -38,7 +53,6 @@ async function pokaz_kandydatow() {
   }
   Charte()
 }
-
 function make_div_kandydata(kandydat) {
   const div = document.createElement("div")
   div.classList.add("div")
@@ -63,14 +77,6 @@ function make_div_kandydata(kandydat) {
   div.appendChild(div_wynik)
   all.appendChild(div)
 }
-function przygotuj_wykres() {
-  gora = []
-  glosy = []
-  //customowy element w ktorym robi sie wykres
-  const canvas = document.createElement("canvas")
-  canvas.setAttribute("id", "myChart")
-  document.getElementById("wykres").appendChild(canvas)
-}
 //usuwa wszystkie rekordy z tabeli spis
 async function remove_result() {
   const url = `${base_url}/remove_result`
@@ -78,17 +84,16 @@ async function remove_result() {
   await fetch(url)
   pokaz_kandydatow()
 }
-
-//pokazuje pesela u odpowiedniego kanydata
-function pokaz_wyniki(kandydat) {
-  for (var i = 0; i <= wyniki.length - 1; i++) {
-    if (wyniki[i].kandydat == kandydat) {
-      const tytul = document.createElement("h1")
-      tytul.innerHTML = wyniki[i].pesel_wyborcy
-      tytul.classList.add("pesel")
-      div_wynik.appendChild(tytul)
-    }
-  }
+/**
+ * ! WYKRES
+ */
+function przygotuj_wykres() {
+  gora = []
+  glosy = []
+  //customowy element w ktorym robi sie wykres
+  const canvas = document.createElement("canvas")
+  canvas.setAttribute("id", "myChart")
+  document.getElementById("wykres").appendChild(canvas)
 }
 //tworzy wykres
 function Charte() {
@@ -129,69 +134,54 @@ function Charte() {
     },
   })
 }
-async function usun_kandydata(kandydat) {
-  var wybrany = kandydat
-  const url = `${base_url}/usun/${wybrany}`
-
-  await fetch(url)
-  pokaz_kandydatow()
-}
-
-//wyslanie zapytania do servera o dodanie kandydata, nazwa z inputa
-async function dodaj_kandydata() {
-  const input = haslo
-
-  const url = `${base_url}/add/${input.value}`
-
-  await fetch(url)
-  input.value = ""
-  closePopup_haslo()
-  pokaz_kandydatow()
-}
-//do dodawania kandydata ulatwienie
-haslo.addEventListener("keydown", function (e) {
-  if (e.code === "Enter") {
-    dodaj_kandydata()
-  }
-})
+/**
+ * ! WSZYSTKO OD HASLA
+ */
 //tworzy miejsce do zmieniania hasla
-async function pokaz_zmien_haslo() {
+async function pokaz_haslo() {
   var data = await fetch(`${base_url}/pokaz_haslo`)
   var json = await data.json()
 
-  all.innerHTML = ""
-  const div = document.createElement("div")
-  div.style.margin = "70px"
-
-  const input = document.createElement("input")
-  input.setAttribute("id", "haslo")
-  input.classList.add("przycisk")
-  input.setAttribute("placeholder", "nowe haslo")
-  input.setAttribute("type", "password")
-
-  const btn = document.createElement("button")
-  btn.innerHTML = "zmien haslo"
-  btn.setAttribute("onclick", `zmien_haslo()`)
-  btn.classList.add("przycisk")
-
-  const haslo_now = document.createElement("h1")
-  haslo_now.innerHTML = "aktualne haslo: " + json[0].haslo
-  haslo_now.classList.add("haslo")
-
-  div.appendChild(haslo_now)
-  div.appendChild(input)
-  div.appendChild(btn)
-  all.appendChild(div)
+  const haslo_now = document.getElementById("aktualne_haslo")
+  haslo_now.innerHTML = `aktualne haslo: ${json[0].haslo}`
 }
 //obsluguje zmienianie hasla w bazie danych przez server
 async function zmien_haslo() {
-  const new_haslo = nowe_haslo.value
-  console.log(new_haslo)
+  var data = await fetch(`${base_url}/pokaz_haslo`)
+  var json = await data.json()
 
-  const url = `${base_url}/zmien_haslo/${new_haslo}`
-  await fetch(url)
-  closePopup_glos()
-  pokaz_kandydatow()
+  const new_haslo = nowe_haslo.value
+
+  if (new_haslo == json[0].haslo) {
+    tytul_haslo.innerHTML = "TO SAMO HASLO"
+  } else {
+    const url = `${base_url}/zmien_haslo/${new_haslo}`
+    await fetch(url)
+    closePopup_haslo()
+    pokaz_kandydatow()
+  }
+}
+function show_password() {
+  if (nowe_haslo.type == "password") {
+    console.log("text")
+    nowe_haslo.type = "text"
+  } else {
+    nowe_haslo.type = "password"
+    console.log("passord")
+  }
+}
+//otwiera okienko do wyslania glosu
+function openPopup_haslo() {
+  popup_haslo.classList.add("open-popup_haslo")
+  nowe_haslo.value = ""
+  nowe_haslo.focus()
+  document.getElementById("body").style.overflowY = "hidden"
+  pokaz_haslo()
+}
+function closePopup_haslo() {
+  popup_haslo.classList.remove("open-popup_haslo")
+  document.getElementById("body").style.overflowY = "auto"
+  tytul_haslo.innerHTML = "Wprowadz nowe haslo"
 }
 //do dodawania kandydata ulatwienie
 nowe_haslo.addEventListener("keydown", function (e) {
@@ -199,30 +189,46 @@ nowe_haslo.addEventListener("keydown", function (e) {
     zmien_haslo()
   }
 })
+/**
+ * ! WSZYSTKO OD KANDYDATA
+ */
+async function usun_kandydata(kandydat) {
+  var wybrany = kandydat
+  const url = `${base_url}/usun/${wybrany}`
+
+  await fetch(url)
+  pokaz_kandydatow()
+}
+//wyslanie zapytania do servera o dodanie kandydata, nazwa z inputa
+async function dodaj_kandydata() {
+  const input = new_kandydat
+
+  const url = `${base_url}/add/${input.value}`
+
+  await fetch(url)
+  input.value = ""
+  closePopup_kandydat()
+  pokaz_kandydatow()
+}
 //otwiera okienko do wpowadzenia haslo do admina
-function openPopup_haslo() {
-  popup_haslo.classList.add("open-popup_haslo")
-  haslo.focus()
+function openPopup_kandydat() {
+  popup_kandydat.classList.add("open-popup_kandydat")
+  new_kandydat.focus()
   document.getElementById("body").style.overflowY = "hidden"
 }
-function closePopup_haslo() {
-  popup_haslo.classList.remove("open-popup_haslo")
-  document.getElementById("body").style.overflowY = "auto"
-}
-//otwiera okienko do wyslania glosu
-function openPopup_glos() {
-  popup_glos.classList.add("open-popup_glos")
-  nowe_haslo.value = ""
-  nowe_haslo.focus()
-  document.getElementById("body").style.overflowY = "hidden"
-}
-function closePopup_glos() {
-  popup_glos.classList.remove("open-popup_glos")
+function closePopup_kandydat() {
+  popup_kandydat.classList.remove("open-popup_kandydat")
   document.getElementById("body").style.overflowY = "auto"
 }
 document.addEventListener("keydown", function (e) {
   if (e.code === "Escape") {
+    closePopup_kandydat()
     closePopup_haslo()
-    closePopup_glos()
+  }
+})
+//do dodawania kandydata ulatwienie
+new_kandydat.addEventListener("keydown", function (e) {
+  if (e.code === "Enter") {
+    dodaj_kandydata()
   }
 })
