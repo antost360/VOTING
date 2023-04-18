@@ -130,3 +130,12 @@ document.addEventListener("keydown", function (e) {
     closePopup_glos()
   }
 })
+function show_password() {
+  if (haslo.type == "password") {
+    console.log("text")
+    haslo.type = "text"
+  } else {
+    haslo.type = "password"
+    console.log("passord")
+  }
+}
