@@ -164,6 +164,7 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.644);
+  backdrop-filter: blur(7px);
   border-radius: 15px;
   border: 2px solid black;
   font-family: "Tilt Warp", cursive;
@@ -226,6 +227,7 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.644);
+  backdrop-filter: blur(7px);
   border-radius: 15px;
   border: 2px solid black;
   font-family: "Tilt Warp", cursive;
